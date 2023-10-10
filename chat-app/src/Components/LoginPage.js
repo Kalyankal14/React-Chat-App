@@ -23,6 +23,7 @@ export const LoginPage = () => {
         setEmail('');
         setPassword('');
         //console.log(`email : ${email}, password : ${password}`);
+        //console.log(auth.currentUser);
         navigate("/home");
       })
       .catch((error) => {
@@ -54,6 +55,7 @@ export const LoginPage = () => {
           Login
         </button>
       </form>
+
       <p>
         Don't have an account? <Link to="/signup">Sign Up</Link>
       </p>

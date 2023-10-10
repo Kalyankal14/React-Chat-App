@@ -17,15 +17,14 @@ export const SignUp = () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setLoading(false);
         setEmail('');
         setPassword('');
-        //console.log(`email : ${email}, password : ${password}`);
         setSuccessMessage('Successfully registered. You can now log in.');
       })
       .catch((error) => {
-        setError(error.message);
-        setLoading(false);
+        console.log(error);
+        // setError(error.message);
+        // setLoading(false);
       });
   };
 

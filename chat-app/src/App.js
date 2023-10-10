@@ -4,7 +4,9 @@ import {LoginPage} from './Components/LoginPage';
 import {SignUp} from './Components/SignUp';
 import { Home } from './Components/Home';
 
+
 function App() {
+  
   return (
     <div className="App">
       <h1> ChatApp </h1>

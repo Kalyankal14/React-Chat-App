@@ -1,16 +1,23 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../App.css';
+
+import Chat from '../Components/Chat.js';
+
+
 
 export const Home = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        navigate('/');
-    }
+  const handleLogout = () => {
+      navigate('/');
+  }
   return (
     <div>
+        <header> 
+        <button className = 'btn' type='button' onClick={handleLogout}> Logout </button> 
+        </header> <br />
         
-        <h1> Welcome to the chatApp............ </h1>
-        <button type='button' onClick={handleLogout}> Logout </button> </div>
+              <Chat />
+    </div>
   )
 }
