@@ -1,13 +1,19 @@
-import React from 'react';
+import { signOut } from 'firebase/auth';
+import React, { useContext } from 'react';
+import { auth } from '../firebase';
+import { AuthContext } from '../Context/AuthContext';
 
 const Navbar = () => {
+  const {currUser} = useContext(AuthContext);
+  //console.log(currentUser);
+  
   return (
     <>
       <span> chatApp </span>
-      <div>
-        <span> User1 </span>
-        <button type="submit"> Logout </button>
-      </div>
+      
+        <span> {currUser.displayName}  </span>
+        <button onClick= {()=>signOut(auth)} type="submit"> Logout </button> <br />
+      
       
     </>
   );

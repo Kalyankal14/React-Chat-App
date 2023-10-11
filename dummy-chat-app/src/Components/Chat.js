@@ -6,7 +6,7 @@ const Chat = () => {
   return (
     <>
       <div>
-        <header>username</header>
+        {/* <header>username</header> */}
         <Messages />
         <Input />
       </div>
