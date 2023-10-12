@@ -4,6 +4,7 @@ import Login from './Components/Login.js';
 import Home from './Components/Home.js';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from "./Context/AuthContext";
+import './App.scss';
 
 
 export default function App() {

@@ -1,13 +1,13 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
-import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 
 const Login = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
   //console.log(auth)
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,26 +15,31 @@ const Login = () => {
     const password = e.target[1].value;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-      navigate('/')
-      
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (err) {
       setErr(true);
     }
   };
 
-
-  return <>
-  <h1> chatApp </h1>
-  <h2> Login </h2>
-  <form onSubmit={handleSubmit}> 
-  <input type="text" placeholder = 'Email'/>
-  <input type="password" placeholder = 'Password'/> <br /> <br />
-  <button type = 'submit'> Sign In </button>
-  {err && <span> Email/Password is incorrect </span>}
-    </form>
-    <p> You don't have an account? <Link to = '/register'> Register</Link> </p>
-    
-    </>;
-}
+  return (
+    <>
+      <div className="formContainer">
+        <div className="formWrapper">
+        <span className="logo"> chatApp </span>
+        <span className="title"> Login </span>
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <button> Sign In </button>
+          {err && <span style={{ color: "red" }}> Email/Password is incorrect </span>}
+        </form>
+        <p>
+          You don't have an account? <Link to="/register"> Register</Link>
+        </p>
+        </div>
+      </div>
+    </>
+  );
+};
 export default Login;

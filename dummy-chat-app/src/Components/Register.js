@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../firebase.js';
-import { doc, setDoc } from 'firebase/firestore';
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,16 +18,16 @@ const Register = () => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(auth)
+      console.log(auth);
 
-      await setDoc(doc(db, 'users', res.user.uid), {
+      await setDoc(doc(db, "users", res.user.uid), {
         uid: res.user.uid,
         displayName,
         email,
       });
 
-      await setDoc(doc(db, 'userChats', res.user.uid), {});
-      navigate('/');
+      await setDoc(doc(db, "userChats", res.user.uid), {});
+      navigate("/");
     } catch (err) {
       setErr(true);
     }
@@ -35,16 +35,22 @@ const Register = () => {
 
   return (
     <>
-      <h1> chatApp </h1>
-      <h2> Register </h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Display Name" />
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" /> <br /> <br />
-        <button type="submit"> Sign Up </button>
-        {err && <span> Something went wrong </span>}
-      </form>
-      <p> You do have an account? <Link to= '/login' >Login</Link> </p>
+      <div className="formContainer">
+        <div className="formWrapper">
+          <span className="logo"> chatApp </span>
+          <span className="title"> Register </span>
+          <form onSubmit={handleSubmit}>
+            <input required type="text" placeholder="Display Name" />
+            <input required type="email" placeholder="Email" />
+            <input required type="password" placeholder="Password" /> <br /> <br />
+            <button type="submit"> Sign Up </button>
+            {err && <span style={{ color: "red" }}> Something went wrong </span>}
+          </form>
+          <p>
+            You do have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
     </>
   );
 };

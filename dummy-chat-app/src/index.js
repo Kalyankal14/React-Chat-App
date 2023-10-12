@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { AuthContextProvider } from './Context/AuthContext.js';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { AuthContextProvider } from "./Context/AuthContext.js";
+import { ChatContextProvider } from "./Context/ChatContext";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
-    <App />
+    <ChatContextProvider>
+      <App />
+    </ChatContextProvider>
   </AuthContextProvider>
 );
 

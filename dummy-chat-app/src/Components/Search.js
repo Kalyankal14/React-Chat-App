@@ -12,26 +12,29 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../Context/AuthContext";
+import { ChatContext } from "../Context/ChatContext";
 
 const Search = () => {
   const [username, setUsername] = useState("");
-  const [user, setUser] = useState("");
-  const [err, setErr] = useState(null);
+  const [user, setUser] = useState(null);
+  const [err, setErr] = useState(false);
 
   const { currUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
 
   const handleSearch = async () => {
-    const userRef = collection(db, "users");
+    //const userRef = collection(db, "users");
     // Create a query against the collection.
-    const q = query(userRef, where("displayName", "==", username));
+    const q = query(collection(db, "users"), where("displayName", "==", username));
 
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
       });
+      setErr(false);
     } catch (err) {
-      // console.error(err);
+      //console.error(err);
       setErr(true);
     }
   };
@@ -41,6 +44,7 @@ const Search = () => {
   };
 
   const handleSelect = async () => {
+    
     const combinedId =
       currUser.uid > user.uid
         ? currUser.uid + user.uid
@@ -66,22 +70,31 @@ const Search = () => {
       }
     } catch (err) {}
     setUser(null);
-    setUsername('')
+    setUsername("");
+    dispatch({ type: "CHANGE_USER", payload: user });
   };
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder="search here"
-        onKeyDown={handleKey}
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <div>{err && <span>User not Found!</span>}</div>
+    <div className="search">
+      <div className="searchForm">
+        <input
+          type="text"
+          placeholder="Search for the user"
+          onKeyDown={handleKey}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+      {err && <span>User not Found!</span>}
 
-      {user && <span onClick={handleSelect}> {user.displayName}</span>}
-    </>
+      {user && (
+        <div className="userChat" onClick={handleSelect}>
+          <div className="userChatInfo">
+            <span> {user.displayName}</span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 export default Search;
