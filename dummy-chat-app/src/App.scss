@@ -100,7 +100,7 @@
     width: 65%;
     height: 80%;
     display: flex;
-    overflow: hidden;
+    overflow: scroll;
     @include tablet {
      width: 90%;
     }
