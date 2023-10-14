@@ -42,9 +42,15 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <input required type="text" placeholder="Display Name" />
             <input required type="email" placeholder="Email" />
-            <input required type="password" placeholder="Password" /> <br /> <br />
+            <input
+              required
+              type="password"
+              placeholder="Password"
+            /> <br /> <br />
             <button type="submit"> Sign Up </button>
-            {err && <span style={{ color: "red" }}> Something went wrong </span>}
+            {err && (
+              <span style={{ color: "red" }}> Something went wrong </span>
+            )}
           </form>
           <p>
             You do have an account? <Link to="/login">Login</Link>

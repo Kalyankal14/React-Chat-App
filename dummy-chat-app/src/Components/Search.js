@@ -25,7 +25,10 @@ const Search = () => {
   const handleSearch = async () => {
     //const userRef = collection(db, "users");
     // Create a query against the collection.
-    const q = query(collection(db, "users"), where("displayName", "==", username));
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", username)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
@@ -44,7 +47,6 @@ const Search = () => {
   };
 
   const handleSelect = async () => {
-    
     const combinedId =
       currUser.uid > user.uid
         ? currUser.uid + user.uid

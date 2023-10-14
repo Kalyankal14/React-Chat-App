@@ -11,17 +11,17 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, async (user) => {
       setCurrUser(user);
-      if(user){
-      const q = query(collection(db, "users"), where("uid", "==", user.uid));
+      if (user) {
+        const q = query(collection(db, "users"), where("uid", "==", user.uid));
 
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        const userData = doc.data();
-        setCurrUser({...currUser,...userData});
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      });
-    }
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const userData = doc.data();
+          setCurrUser({ ...currUser, ...userData });
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+        });
+      }
     });
 
     return () => {

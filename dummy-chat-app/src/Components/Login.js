@@ -26,17 +26,22 @@ const Login = () => {
     <>
       <div className="formContainer">
         <div className="formWrapper">
-        <span className="logo"> chatApp </span>
-        <span className="title"> Login </span>
-        <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <button> Sign In </button>
-          {err && <span style={{ color: "red" }}> Email/Password is incorrect </span>}
-        </form>
-        <p>
-          You don't have an account? <Link to="/register"> Register</Link>
-        </p>
+          <span className="logo"> chatApp </span>
+          <span className="title"> Login </span>
+          <form onSubmit={handleSubmit}>
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button> Sign In </button>
+            {err && (
+              <span style={{ color: "red" }}>
+                {" "}
+                Email/Password is incorrect{" "}
+              </span>
+            )}
+          </form>
+          <p>
+            You don't have an account? <Link to="/register"> Register</Link>
+          </p>
         </div>
       </div>
     </>

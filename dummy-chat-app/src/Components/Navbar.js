@@ -12,7 +12,11 @@ const Navbar = () => {
       <span className="logo">chatApp</span>
       <div className="user">
         <span> {currUser.displayName} </span>
-        <button className = 'logout-btn' onClick={() => signOut(auth)} type="submit">
+        <button
+          className="logout-btn"
+          onClick={() => signOut(auth)}
+          type="submit"
+        >
           Logout
         </button>
       </div>
